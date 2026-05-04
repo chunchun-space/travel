@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --ac-green: #78d8a8;
+      --ac-yellow: #fdf5a2;
+      --ac-brown: #8b5a2b;
+      --ac-bg: #f8f0e0;
+      --ac-card: #ffffff;
+    }
+
+    body { 
+      background-color: var(--ac-bg); 
+      font-family: "Microsoft JhengHei", sans-serif; 
+      color: var(--ac-brown);
+      margin: 0; padding-bottom: 80px;
+    }
+
+    /* 動森風格卡片 */
+    .card {
+      background: var(--ac-card);
+      border-radius: 25px;
+      margin: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 0 #e0d0b0;
+      border: 3px solid #eee5d0;
+    }
+
+    h2 { color: #5ab58d; border-bottom: 3px dashed var(--ac-green); }
+    
+    .tab-bar {
+      position: fixed; bottom: 0; width: 100%;
+      background: var(--ac-green); display: flex;
+      justify-content: space-around; padding: 10px 0;
+      border-top: 5px solid #5ab58d;
+    }
+
+    .tab-item { color: white; text-align: center; font-size: 12px; text-decoration: none; }
+    .tab-item i { font-size: 24px; display: block; }
+
+    /* 匯率換算器 */
+    .calc-box { background: #fff9e6; padding: 15px; border-radius: 15px; }
+    input, select { width: 100%; padding: 10px; margin: 5px 0; border-radius: 10px; border: 2px solid var(--ac-green); }
+    
+    .btn { background: var(--ac-green); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <div id="content">
+    <div class="card">
+      <h2><i class="fas fa-plane"></i> 飛行預定</h2>
+      <p><b>去程 IT214:</b> 6/10 11:00 → 15:05 (15kg*2)</p>
+      <p><b>回程 IT215:</b> 6/15 15:55 → 17:40 (25kg+30kg)</p>
+    </div>
+
+    <div class="card">
+      <h2><i class="fas fa-calculator"></i> 匯率計算機</h2>
+      <div class="calc-box">
+        <input type="number" id="jpyAmount" placeholder="輸入日圓 (JPY)" oninput="convert()">
+        <p>約為台幣：<span id="twdResult">0</span> TWD</p>
+        <small>* 匯率預設 0.21 (可自行修改)</small>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><i class="fas fa-map-marked-alt"></i> 行程摘要</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li>📅 6/10: 岡山取車 → 高松市區</li>
+        <li>📅 6/11: 栗林公園 → 高松散步</li>
+        <li>📅 6/12: 小豆島 (住:天空海廬)</li>
+        <li>📅 6/13: 金刀比羅宮 → 道後溫泉</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><i class="fas fa-check-square"></i> 打包清單</h2>
+      <input type="checkbox"> 護照/簽證/小黃卡影本<br>
+      <input type="checkbox"> 日幣現金/信用卡/ICOCA<br>
+      <input type="checkbox"> 國際駕照 (譯本)<br>
+      <input type="checkbox"> 萬用轉接頭/延長線<br>
+      <input type="checkbox"> 常備藥 (感冒、腸胃、暈車)<br>
+    </div>
+  </div>
+
+  <nav class="tab-bar">
+    <a href="#" class="tab-item"><i class="fas fa-calendar-day"></i>行程</a>
+    <a href="#" class="tab-item"><i class="fas fa-hotel"></i>預定</a>
+    <a href="#" class="tab-item"><i class="fas fa-coins"></i>記帳</a>
+    <a href="#" class="tab-item"><i class="fas fa-suitcase"></i>準備</a>
+  </nav>
+
+  <script>
+    function convert() {
+      const jpy = document.getElementById('jpyAmount').value;
+      const rate = 0.21; // 假設匯率
+      document.getElementById('twdResult').innerText = Math.round(jpy * rate);
+    }
+  </script>
+</body>
+</html>
